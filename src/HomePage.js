@@ -1,9 +1,11 @@
 import React, {Component} from 'react';
-import {Alert, Image, Text, TouchableOpacity, View} from 'react-native';
+import {Alert, Button, Image, ScrollView, Text, TouchableOpacity, View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import Label from './Label'
 import Recomendation from './Recomendation';
 import SearchBar from './SearchBar'
+import Popular from './Popular'
+import NearestEvent from './NearestEvent'
 
 class HomePage extends Component {  
 
@@ -11,9 +13,21 @@ class HomePage extends Component {
     render() {
         return (
             <>
-            <Label></Label>
-            <SearchBar></SearchBar>
-            <Recomendation></Recomendation>
+            <Label/>
+            <Button
+                title="Map"
+                onPress={() => Actions.MapPage()}
+            />
+            <SearchBar/>
+            <Button
+                title="Favourites"
+                onPress={() => Actions.Favourites()}
+            />
+            <ScrollView>
+                <Recomendation/>
+                <Popular/>
+                <NearestEvent/>
+            </ScrollView>
             </>
         );
     }   

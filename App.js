@@ -3,6 +3,8 @@ import { ActivityIndicator, FlatList, Text, View, StyleSheet, Image } from 'reac
 import { Router, Scene } from 'react-native-router-flux';
 import Authentication from './src/Authentication'
 import HomePage from './src/HomePage'
+import MapPage from './src/MapPage'
+import Favourites from './src/Favourites'
 
 export default App = () => {
   const [isLoading, setLoading] = useState(true);
@@ -32,6 +34,18 @@ export default App = () => {
           hideNavBar = {true}
           key = 'HomePage'
           title = 'HomePage'
+        />
+        <Scene
+          component = {MapPage}
+          hideNavBar = {true}
+          key= 'MapPage'
+          title = 'MapPage'
+        />
+        <Scene
+          component = {Favourites}
+          hideNavBar = {true}
+          key= 'Favourites'
+          title = 'Favourites'
         />
       </Scene>
     </Router>
