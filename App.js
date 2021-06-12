@@ -1,5 +1,8 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, Component } from 'react';
 import { ActivityIndicator, FlatList, Text, View, StyleSheet, Image } from 'react-native';
+import { Router, Scene } from 'react-native-router-flux';
+import Authentication from './src/Authentication'
+import HomePage from './src/HomePage'
 
 export default App = () => {
   const [isLoading, setLoading] = useState(true);
@@ -15,23 +18,40 @@ export default App = () => {
 
 
   return (
-    <View>
-      {isLoading ? <ActivityIndicator/> : (
-        <FlatList style={ styles.flat }
-          data={data}
-          keyExtractor={({ id }, index) => id.toString()}
-          renderItem={({ item }) => (
-            <>
-              <Text>{ item.title }</Text>
-              <Image 
-              style={styles.tinyLogo}
-              source = {{ uri:  'https://www.mos.ru' +  item.image.small.src }}
-              />
-            </>
-          )}
+    <Router>
+      <Scene key ='root'>
+        <Scene 
+          component = {Authentication}
+          hideNavBar= {true}
+          initial = {true}
+          key='Authentication'
+          title='Authentication'
         />
-      )}
-    </View>
+        <Scene
+          component = {HomePage}
+          hideNavBar = {true}
+          key = 'HomePage'
+          title = 'HomePage'
+        />
+      </Scene>
+    </Router>
+    // <View>
+    //   {isLoading ? <ActivityIndicator/> : (
+    //     <FlatList style={ styles.flat }
+    //       data={data}
+    //       keyExtractor={({ id }, index) => id.toString()}
+    //       renderItem={({ item }) => (
+    //         <>
+    //           <Text>{ item.title }</Text>
+    //           <Image 
+    //           style={styles.tinyLogo}
+    //           source = {{ uri:  'https://www.mos.ru' +  item.image.small.src }}
+    //           />
+    //         </>
+    //       )}
+    //     />
+    //   )}
+    // </View>
   );
 };
 
