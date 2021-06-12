@@ -2,7 +2,7 @@ import React, {Component} from 'react';
 import {Alert, Button, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import {Actions} from 'react-native-router-flux';
 import  MapView  from 'react-native-maps'
-import SearchBar from './SearchBar';
+import SearchNavBar from './SearchNavBar';
 
 class MapPage extends Component {  
     constructor() {
@@ -16,7 +16,7 @@ class MapPage extends Component {
                 title="Back"
                 onPress={() => Actions.HomePage()}
             />
-            <SearchBar/>
+            <SearchNavBar/>
             <Button
                 title="Favourites"
                 onPress={() => Actions.Favourites()}
@@ -32,12 +32,6 @@ class MapPage extends Component {
                 }}>
 
             </MapView>
-            {/* <Map
-                google = {this.props.google}
-                // zoom = {15}
-                // style = {styles.map}
-                // initialCenter={{ lat: 9.761927, lng: 79.95244 }}
-            /> */}
             </>
         );
     }   

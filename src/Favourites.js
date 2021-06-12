@@ -3,7 +3,7 @@ import {Alert, Button, ImageBackground, ScrollView, Text, TouchableOpacity, View
 import {Actions} from 'react-native-router-flux';
 import Label from './Label'
 import Recomendation from './Recomendation';
-import SearchBar from './SearchBar'
+import SearchNavBar from './SearchNavBar'
 import Popular from './Popular'
 import NearestEvent from './NearestEvent'
 
@@ -32,7 +32,7 @@ class Favourites extends Component {
                 title="Map"
                 onPress={() => Actions.MapPage()}
             />
-            <SearchBar/>
+            <SearchNavBar/>
             <Button
                 title="Favourites"
                 onPress={() => Actions.Favourites()}
