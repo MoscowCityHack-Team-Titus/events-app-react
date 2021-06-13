@@ -1,7 +1,9 @@
 import React, {Component} from 'react';
-import {Alert, Button, Image, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import { Icon } from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
 import  MapView  from 'react-native-maps'
+import Label from './Label'
 import SearchNavBar from './SearchNavBar';
 
 class MapPage extends Component {  
@@ -12,15 +14,24 @@ class MapPage extends Component {
     render() {
         return (
             <>
-            <Button marginTop='50px'
-                title="Back"
-                onPress={() => Actions.HomePage()}
-            />
-            <SearchNavBar/>
-            <Button
-                title="Favourites"
-                onPress={() => Actions.Favourites()}
-            />
+            <Label/>
+            <View style={styles.view}>
+                <Icon style={styles.icon}
+                    reverse
+                    name="map"
+                    type="simple-line-icon"
+                    color='#C82220'
+                    onPress={() => Actions.HomePage()}
+                />
+                <SearchNavBar/>
+                <Icon style={styles.icon}
+                    raised
+                    name='heart'
+                    type='simple-line-icon'
+                    color='#BEBEBE'
+                    onPress={() => Actions.Favourites()}
+                />
+            </View>
             <MapView 
                 style={styles.map}
                 loadingEnabled={true}
@@ -38,6 +49,24 @@ class MapPage extends Component {
 }
 
 const styles = StyleSheet.create({
+    button: {
+        width: 37,
+        height: 37,
+        left: 21,
+        borderRadius: 50,
+        shadowColor: 'rgba(178, 178, 178, 0.25)',
+        shadowOffset: { top: 0, left: 4, bottom: 10},
+        backgroundColor: '#FFFDFE'
+    },
+    icon: {
+        width:30,
+        height:30
+    },
+    view: {
+        width: '100%',
+        flexDirection: 'row',
+        justifyContent: 'space-between',
+    },
     map: {
         width: '100%',
         height: '100%',

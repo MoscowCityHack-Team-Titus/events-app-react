@@ -12,6 +12,7 @@ class Label extends Component {
 
 const styles = StyleSheet.create({
     text: {
+        margin: 20,
         fontSize: 26,
         fontWeight: "500",
         lineHeight: 26,
