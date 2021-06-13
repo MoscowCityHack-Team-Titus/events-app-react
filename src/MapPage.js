@@ -1,5 +1,5 @@
 import React, {Component} from 'react';
-import {StyleSheet, Text, TouchableOpacity, View} from 'react-native';
+import {StyleSheet, View} from 'react-native';
 import { Icon } from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
 import  MapView  from 'react-native-maps'
@@ -14,8 +14,16 @@ class MapPage extends Component {
     render() {
         return (
             <>
-            <Label/>
-            <View style={styles.view}>
+            <MapView 
+                style={styles.map}
+                loadingEnabled={true}
+                region={{
+                    latitude: 55.74027,
+                    longitude: 37.6736,
+                    latitudeDelta: 0.015,
+                    longitudeDelta: 0.0121
+                }}>
+                    <View style={styles.view}>
                 <Icon style={styles.icon}
                     reverse
                     name="map"
@@ -31,17 +39,7 @@ class MapPage extends Component {
                     color='#BEBEBE'
                     onPress={() => Actions.Favourites()}
                 />
-            </View>
-            <MapView 
-                style={styles.map}
-                loadingEnabled={true}
-                region={{
-                    latitude: 55.74027,
-                    longitude: 37.6736,
-                    latitudeDelta: 0.015,
-                    longitudeDelta: 0.0121
-                }}>
-
+                </View>
             </MapView>
             </>
         );

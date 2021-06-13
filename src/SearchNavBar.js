@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native';
-import { SearchBar, Input } from 'react-native-elements'
+import { Input } from 'react-native-elements'
 import { Icon } from 'react-native-elements';
 
 class SearchNavBar extends Component {
@@ -35,18 +35,6 @@ class SearchNavBar extends Component {
                     }
                 />
             </View>
-            // <TextInput style={styles.search}
-            //     value={this.state.searchParams}
-            //     placeholder='Концерты, Стендапы'
-            //     onChangeText={searchParams => this.setState({searchParams})}>
-            //         <Icon style={styles.icon}
-            //             raised
-            //             name="map"
-            //             type="simple-line-icon"
-            //             color='#BEBEBE'
-            //             onPress={() => Actions.MapPage()}
-            //         />
-            // </TextInput>
         );
     }
 }

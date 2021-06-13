@@ -4,7 +4,7 @@ import {RadioButton} from 'react-native-paper';
 import {Actions} from 'react-native-router-flux';
 import SelectMultiple from 'react-native-select-multiple'
 
-const hobbies = ['Образование', 'Концерты', 'Спектакли', 'Выставки', 'Кино', 'Игры']
+const hobbies = ['Образование', 'Концерты', 'Спектакли', 'Выставки', 'Экскурсии', 'События в парках', 'Спорт', 'Квесты', 'Лекции', 'Кино', 'Игры', 'Музеи', 'Интернет', 'Мастер-классы','Городское пространство', 'Другое']
 
 class Authentication extends Component {
     state = {
@@ -45,8 +45,6 @@ class Authentication extends Component {
     render() {
         return (
         <View >
-            <Text > Welcome </Text>
-
             <View >
                 <Text>Female</Text>
                 <RadioButton

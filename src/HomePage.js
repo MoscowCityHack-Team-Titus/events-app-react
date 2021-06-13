@@ -14,7 +14,6 @@ class HomePage extends Component {
     render() {
         return (
             <>
-            <Label/>
             <View style={styles.view}>
                 <Icon style={styles.icon}
                     raised

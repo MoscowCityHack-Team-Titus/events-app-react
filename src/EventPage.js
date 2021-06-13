@@ -1,24 +1,21 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, StyleSheet, ImageBackground, TouchableOpacity, Alert } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
-import { Actions } from 'react-native-router-flux';
 
 
-class Recomendation extends Component {
-
+class EventPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
             data: [],
             isLoading: true,
-            id: 98016257,
+            id: null,
             wishList: true,
-            idEvent: null,
         };
     }
 
     componentDidMount() {
-        fetch('https://www.mos.ru/api/newsfeed/v4/frontend/json/ru/afisha?expand=spheres&fields=id,title,label,image,date_from,date_to,kind,free&filter=%7B%22%3C%3Doccurrences.date_from%22:%222021-06-27+23:59:59%22,%22%3E%3Doccurrences.date_from%22:%222021-05-27+00:00:00%22%7D&per-page=9&sort=occurrences.date_to,-occurrences.date_from')
+        fetch('https://www.mos.ru/api/newsfeed/v4/frontend/json/ru/afisha?fields=id,title,label,image,date_from,date_to,kind,free&filter={"id":"${encodeURIComponent(this.props.idEvent)}"}')
             .then((response) => response.json())
             .then((json) => this.setState({ data: json.items }))
             .catch((error) => console.error(error))
@@ -45,13 +42,17 @@ class Recomendation extends Component {
     render () {
         return (
             <>
+            <Text>{this.props.idEvent}</Text>
             <Text style={styles.title}>Рекомендуемые мероприятия</Text>
             <View>
                 <ScrollView horizontal={true}>
-                    { this.state.data.map((el, i) => (
+                    <Text>{this.state.date}</Text>
+                    {/* { this.state.data.map((el, i) => (
                         <View key= {i}>
-                            <TouchableOpacity key={i} onPress={() => Actions.EventPage({idEvent: el.id})}>
-                            <ImageBackground key={i}
+                            <TouchableOpacity key={i} onPress={
+                                    this.setLiked.bind(this)
+                                }>
+                            <ImageBackground key= {i}
                                 style={styles.tinyLogo}
                                 source = {{ uri:  'https://www.mos.ru' +  el.image.small.src }}>
                                 <LinearGradient colors={['rgba(0,0,0,0.0)', 'rgba(0,0,0,0.8)']}
@@ -73,7 +74,7 @@ class Recomendation extends Component {
                             </ImageBackground>
                             </TouchableOpacity>
                         </View>
-                    ))}
+                    ))} */}
                 </ScrollView>
             </View>
             </>
@@ -134,4 +135,4 @@ const styles = StyleSheet.create({
     }
 })
 
-export default Recomendation;
+export default EventPage;
