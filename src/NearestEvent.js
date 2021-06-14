@@ -1,5 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, ImageBackground } from 'react-native'
+import { Text, View, ScrollView, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native'
+import { Actions } from 'react-native-router-flux';
+
 
 
 class Recomendation extends Component {
@@ -26,6 +28,7 @@ class Recomendation extends Component {
             <View>
                 <ScrollView>
                     { this.state.data.map((el, i) => (
+                        <TouchableOpacity key={i} onPress={() => Actions.EventPage({idEvent: el.id})}>
                         <View key= {i} style={styles.block}>
                             <View style={styles.date}>
                                 <Text style={styles.dateText}>
@@ -44,6 +47,7 @@ class Recomendation extends Component {
                                 </View>
                             </View>
                         </View>
+                        </TouchableOpacity>
                     ))}
                 </ScrollView>
             </View>

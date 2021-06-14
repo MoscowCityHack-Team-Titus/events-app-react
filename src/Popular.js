@@ -1,6 +1,7 @@
 import React, { Component } from 'react'
-import { Text, View, ScrollView, StyleSheet, ImageBackground } from 'react-native'
+import { Text, View, ScrollView, StyleSheet, ImageBackground, TouchableOpacity } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
+import { Actions } from 'react-native-router-flux';
 
 
 class Recomendation extends Component {
@@ -28,6 +29,7 @@ class Recomendation extends Component {
                 <ScrollView horizontal={true}>
                     { this.state.data.map((el, i) => (
                         <View key= {i}>
+                            <TouchableOpacity key={i} onPress={() => Actions.EventPage({idEvent: el.id})}>
                             <ImageBackground key= {i}
                                 style={styles.tinyLogo}
                                 source = {{ uri:  'https://www.mos.ru' +  el.image.small.src }}>
@@ -48,6 +50,7 @@ class Recomendation extends Component {
                                     <Text style={styles.location}> YOTA ARENA </Text>
                                 </View>
                             </ImageBackground>
+                            </TouchableOpacity>
                         </View>
                     ))}
                 </ScrollView>

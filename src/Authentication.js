@@ -32,10 +32,8 @@ class Authentication extends Component {
             hobbies: this.state.hobbies,
             }),
         })
-        .then(Alert.alert(JSON.stringify({gender: this.state.gender,age: this.state.age,hobbies: this.state.hobbies,})))
         .then((response) => response.json())
         .then(() => {
-            Alert.alert( 'Вход выполнен'),
             Actions.HomePage();
         })
         .done();
