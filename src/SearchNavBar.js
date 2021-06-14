@@ -1,7 +1,6 @@
 import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native';
-import { Input } from 'react-native-elements'
-import { Icon } from 'react-native-elements';
+import { Input, Icon } from 'react-native-elements'
 import { Actions } from 'react-native-router-flux';
 
 class SearchNavBar extends Component {

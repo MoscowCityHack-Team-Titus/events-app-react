@@ -3,7 +3,6 @@ import { Alert, ImageBackground, ScrollView, Text, View, StyleSheet, TouchableOp
 import { Actions } from 'react-native-router-flux';
 import { Icon } from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
-import Label from './Label'
 import SearchNavBar from './SearchNavBar'
 
 class SearchPage extends Component { 

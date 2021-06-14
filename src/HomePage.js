@@ -2,7 +2,6 @@ import React, {Component} from 'react';
 import {Alert, Image, ScrollView, StyleSheet, Text, TouchableOpacity, View} from 'react-native';
 import { Icon } from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
-import Label from './Label'
 import Recomendation from './Recomendation';
 import SearchNavBar from './SearchNavBar'
 import Popular from './Popular'

@@ -3,7 +3,6 @@ import {StyleSheet, View} from 'react-native';
 import { Icon } from 'react-native-elements';
 import {Actions} from 'react-native-router-flux';
 import  MapView  from 'react-native-maps'
-import Label from './Label'
 import SearchNavBar from './SearchNavBar';
 
 class MapPage extends Component {  
@@ -23,7 +22,7 @@ class MapPage extends Component {
                     latitudeDelta: 0.015,
                     longitudeDelta: 0.0121
                 }}>
-                    <View style={styles.view}>
+                <View style={styles.view}>
                 <Icon style={styles.icon}
                     reverse
                     name="map"
@@ -40,6 +39,24 @@ class MapPage extends Component {
                     onPress={() => Actions.Favourites()}
                 />
                 </View>
+                <MapView.Marker
+                    coordinate={{latitude: 55.766598,
+                    longitude: 37.627212}}
+                    title={"Мир насекомых"}
+                    description={"Ольга Городецкая научит изобразать узоры насекомых"}
+                />
+                <MapView.Marker
+                    coordinate={{latitude: 55.7768419,
+                    longitude: 37.639340}}
+                    title={"История Москвы для детей и взрослых"}
+                    description={"Узнайте история возникновения Кремля!"}
+                />
+                <MapView.Marker
+                    coordinate={{latitude: 55.7507019,
+                    longitude: 37.6223497}}
+                    title={"Образ мира в фотографии"}
+                    description={"Выставка Виктории Гуськовой"}
+                />
             </MapView>
             </>
         );
