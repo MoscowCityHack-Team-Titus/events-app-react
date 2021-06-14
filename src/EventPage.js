@@ -5,17 +5,20 @@ import { Icon } from 'react-native-elements';
 import HTML from 'react-native-render-html'
 
 
+//Страница мероприятия
 class EventPage extends Component {
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
-            isLoading: true,
-            id: this.props.idEvent,
-            wishList: true,
-            styledWishList: 'none'
+            data: [], //данные о мероприятии
+            isLoading: true, //загружены ли данные
+            id: this.props.idEvent, //id мероприятия
+            wishList: true, //добавлено ли в избранное данное мероприятие
+            styledWishList: 'none' //отображать значок избранного
         };
     }
+
+    //GET запрос о мероприятии
 
     componentDidMount() {
         fetch(`https://www.mos.ru/api/newsfeed/v4/frontend/json/ru/afisha?&filter=%7B%22id%22:%22${encodeURIComponent(this.props.idEvent)}%22%7D`)
@@ -24,6 +27,8 @@ class EventPage extends Component {
             .catch((error) => console.error(error))
             .finally(() => this.setState({ isLoading: false }))
     }
+
+    //добавление в избранное
 
     setLiked() {
         fetch('http://192.168.1.65:3390/wishlist', {

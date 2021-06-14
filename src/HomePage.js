@@ -6,7 +6,7 @@ import Recomendation from './Recomendation';
 import SearchNavBar from './SearchNavBar'
 import Popular from './Popular'
 import NearestEvent from './NearestEvent'
-
+//главная сраница
 class HomePage extends Component {  
 
 

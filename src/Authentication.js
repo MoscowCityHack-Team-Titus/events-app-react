@@ -6,21 +6,24 @@ import SelectMultiple from 'react-native-select-multiple'
 
 const hobbies = ['Концерты', 'Музеи', 'Выставки','Здравохранение', 'Строительство и реконструкция', 'Транспорт', 'Образование', 'Городское хозяйство', 'Благоустройство', 'Технологии', 'Культура', 'Экономика и предпринимательство', 'Экология', 'Безопасность', 'Социальная сфера', 'Наука и инновации', 'Спорт','Городское управление', 'Другое']
 
+//Авторизация пользователя и опрос его предпочтений
 class Authentication extends Component {
     state = {
-        gender: 'female',
-        age: null,
-        hobbies: [],
+        gender: 'female', //пол
+        age: null,  //возраст
+        hobbies: [], //увлечения
     }
 
     constructor() {
         super();
     }
 
+    //при выборе нового увлечения
     onSelectionsChange = (hobbies) => {
         this.setState({ hobbies })
     }
 
+    //вход в систему
     userSignup() {
         if (!this.state.gender || !this.state.age || !this.state.hobbies) return Alert.alert("Введите все данные, пожалуйста");
         fetch('http://192.168.1.65:3390/register', {

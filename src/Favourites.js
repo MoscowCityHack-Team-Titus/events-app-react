@@ -5,18 +5,20 @@ import { Icon } from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
 import SearchNavBar from './SearchNavBar'
 
+//страница избранного
 class Favourites extends Component { 
     
     constructor(props) {
         super(props);
         this.state = {
-            data: [],
-            isLoading: true,
-            id: null,
-            wishList: false,
+            data: [], //данные о мероприятиях
+            isLoading: true, //загружены ли данные
+            id: null, //id мероприятия
+            wishList: false, //
         };
     }
 
+    //GET запрос о избранных мероприятиях
     componentDidMount() {
         fetch('http://192.168.1.65:3390/wishlist')
             .then((response) => response.json())
