@@ -3,26 +3,27 @@ import { Alert, ImageBackground, ScrollView, Text, View, StyleSheet, TouchableOp
 import { Actions } from 'react-native-router-flux';
 import { Icon } from 'react-native-elements';
 import { LinearGradient } from 'expo-linear-gradient';
+import Label from './Label'
 import SearchNavBar from './SearchNavBar'
 
-class Favourites extends Component { 
+class SearchPage extends Component { 
     
     constructor(props) {
         super(props);
         this.state = {
             data: [],
-            isLoading: true,
+            isLoading: false,
             id: null,
             wishList: false,
         };
     }
 
     componentDidMount() {
-        fetch('http://192.168.1.65:3390/wishlist')
+        fetch(`https://www.mos.ru/api/newsfeed/v4/frontend/json/ru/afisha?fields=id,title,label,image,date_from,date_to,date,kind&filter=%7B%22title%22:%22%25${encodeURIComponent(this.props.text)}%25%22%7D`)
             .then((response) => response.json())
-            .then((json) => this.setState({ data: json }))
+            .then((json) => this.setState({ data: json.items }))
             .catch((error) => console.error(error))
-            .finally(() => this.setState({ isLoading: false }));
+            .finally(() => this.setState({ isLoading: true }));
     }
 
     render() {
@@ -38,19 +39,20 @@ class Favourites extends Component {
                 />
                 <SearchNavBar/>
                 <Icon style={styles.icon}
-                    reverse
+                    raised
                     name='heart'
                     type='simple-line-icon'
-                    color='#C82220'
-                    onPress={() => Actions.HomePage()}
+                    color='#BEBEBE'
+                    onPress={() => Actions.Favourites()}
                 />
             </View>
             <ScrollView>
                 <>
-                <Text style={styles.title}>Избранные мероприятия</Text>
                 <View>
+                <Text style={styles.title}>Найдено {this.state.data.length} мероприятий</Text>
                     <ScrollView>
-                        { this.state.data.map((el, i) =>
+                        { this.state.isLoading && this.state.data.map((el, i) =>
+                        <>
                             <View key={i} style={styles.container}>
                                 <TouchableOpacity key={i}>
                                     <ImageBackground key= {i}
@@ -65,7 +67,7 @@ class Favourites extends Component {
                                             height: '100%'
                                         }}/>
                                         <View style={styles.type}>
-                                            <Text>{el.spheres[0].title}</Text>
+                                            <Text>Концерты</Text>
                                         </View>
                                         <View style={styles.about} key={ i }>
                                             <Text style={styles.titleEvent}> {el.title} </Text>
@@ -75,6 +77,7 @@ class Favourites extends Component {
                                     </ImageBackground>
                                 </TouchableOpacity>
                             </View>
+                            </>
                         )}
                     </ScrollView>
                 </View>
@@ -157,4 +160,4 @@ const styles = StyleSheet.create({
 })
 
 
-export default Favourites;
+export default SearchPage;

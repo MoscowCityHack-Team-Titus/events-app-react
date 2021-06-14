@@ -1,6 +1,8 @@
 import React, { Component } from 'react'
 import { Text, View, ScrollView, StyleSheet, ImageBackground, TouchableOpacity, Alert } from 'react-native'
 import { LinearGradient } from 'expo-linear-gradient';
+import { Icon } from 'react-native-elements';
+import HTML from 'react-native-render-html'
 
 
 class EventPage extends Component {
@@ -9,17 +11,18 @@ class EventPage extends Component {
         this.state = {
             data: [],
             isLoading: true,
-            id: null,
+            id: this.props.idEvent,
             wishList: true,
+            styledWishList: 'none'
         };
     }
 
     componentDidMount() {
-        fetch('https://www.mos.ru/api/newsfeed/v4/frontend/json/ru/afisha?fields=id,title,label,image,date_from,date_to,kind,free&filter={"id":"${encodeURIComponent(this.props.idEvent)}"}')
+        fetch(`https://www.mos.ru/api/newsfeed/v4/frontend/json/ru/afisha?&filter=%7B%22id%22:%22${encodeURIComponent(this.props.idEvent)}%22%7D`)
             .then((response) => response.json())
-            .then((json) => this.setState({ data: json.items }))
+            .then((json) => this.setState({ data: json.items[0] }))
             .catch((error) => console.error(error))
-            .finally(() => this.setState({ isLoading: false }));
+            .finally(() => this.setState({ isLoading: false }))
     }
 
     setLiked() {
@@ -31,30 +34,20 @@ class EventPage extends Component {
                 wishList: this.state.wishList
             }),
         })
-        .then(Alert.alert(JSON.stringify({id: this.state.id, wishList: this.state.wishList})))
         .then((response) => response.json())
-        .then(() => {
-            Alert.alert('Liked!')
-        })
         .done();
+        this.setState({styledWishList: 'flex'})
     }
 
     render () {
         return (
             <>
-            <Text>{this.props.idEvent}</Text>
-            <Text style={styles.title}>Рекомендуемые мероприятия</Text>
             <View>
-                <ScrollView horizontal={true}>
-                    <Text>{this.state.date}</Text>
-                    {/* { this.state.data.map((el, i) => (
-                        <View key= {i}>
-                            <TouchableOpacity key={i} onPress={
-                                    this.setLiked.bind(this)
-                                }>
-                            <ImageBackground key= {i}
+                <ScrollView>
+                        <View>
+                            <ImageBackground
                                 style={styles.tinyLogo}
-                                source = {{ uri:  'https://www.mos.ru' +  el.image.small.src }}>
+                                source = {{ uri:  'https://www.mos.ru' +  this.state.data.image?.small.src }}>
                                 <LinearGradient colors={['rgba(0,0,0,0.0)', 'rgba(0,0,0,0.8)']}
                                 style={{
                                     position: 'absolute',
@@ -63,18 +56,65 @@ class EventPage extends Component {
                                     top: 0,
                                     height: '100%'
                                 }}/>
-                                <View style={styles.type}>
-                                    <Text>Концерты</Text>
-                                </View>
-                                <View style={styles.about} key={ i }>
-                                    <Text style={styles.titleEvent}> {el.title} </Text>
-                                    <Text style={styles.date}> 14 июня 20:00 </Text>
+                                <View style={{flexDirection: 'row', justifyContent: 'space-between'}}>
+                                    <View style={styles.type}>
+                                        <Text>Концерты</Text>
+                                    </View>
+                                    <Icon
+                                        style={{display: this.state.styledWishList}}
+                                        reverse
+                                        type= 'simple-line-icon'
+                                        name= 'heart'
+                                        color="#C82220"
+                                    />
+                                    </View>
+                                <View style={styles.about} >
+                                    <Text style={styles.titleEvent}> {this.state.data.title} </Text>
+                                    <Text style={styles.date}> {this.state.data.date} </Text>
                                     <Text style={styles.location}> YOTA ARENA </Text>
                                 </View>
                             </ImageBackground>
-                            </TouchableOpacity>
                         </View>
-                    ))} */}
+                        <View>
+                        </View>
+                        <View>
+                            <Text style={styles.title}>О мероприятии</Text>
+                            <HTML html={this.state.data.text}/>
+                            <Text style={styles.title}>Стоимость</Text>
+                            <Text>Цена билета от 900 рублей. Уточняйте стоимость и места продажи билетов на официальном сайте</Text>
+                            <Text style={styles.title}>Место проведения</Text>
+                            <Text>YOTA ARENA</Text>
+                        </View>
+                        <View style={{flexDirection: "row", justifyContent: "space-between"}}>
+                        <Icon
+                            reverse
+                            type= 'simple-line-icon'
+                            name= 'paper-plane'
+                            color="#6E69DD"
+                        />
+                        <Icon
+                            reverse
+                            type= 'simple-line-icon'
+                            name= 'bubbles'
+                            color="#1FE378"
+                        />
+                        <Icon
+                            reverse
+                            type= 'simple-line-icon'
+                            name= 'envelope-letter'
+                            color="#25BFE0"
+                        />
+                        <TouchableOpacity onPress={
+                                    this.setLiked.bind(this)
+                                }>
+                        <Icon
+                            reverse
+                            type= 'simple-line-icon'
+                            name= 'heart'
+                            color="#C82220"
+                        />
+                        </TouchableOpacity>
+                        </View>
                 </ScrollView>
             </View>
             </>
@@ -85,10 +125,8 @@ class EventPage extends Component {
 const styles = StyleSheet.create({
     tinyLogo: {
         overflow: 'hidden',
-        marginLeft: 20,
-        width: 180,
-        height: 250,
-        borderRadius: 10
+        width: '100%',
+        height: 375,
     },
     text: {
         color: '#ffff',
@@ -101,7 +139,7 @@ const styles = StyleSheet.create({
     },
     about: {
         margin: 10,
-        height: 200,
+        height: 300,
         justifyContent: 'flex-end'
     },
     titleEvent: {
@@ -132,6 +170,7 @@ const styles = StyleSheet.create({
         borderRadius: 30,
         height: 16,
         width: 68
+        
     }
 })
 

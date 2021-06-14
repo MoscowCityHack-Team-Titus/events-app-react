@@ -12,7 +12,7 @@ class Recomendation extends Component {
     }
 
     componentDidMount() {
-        fetch('https://www.mos.ru/api/newsfeed/v4/frontend/json/ru/afisha?expand=spheres&fields=id,title,label,image,date_from,date_to,kind,free&filter=%7B%22%3C%3Doccurrences.date_from%22:%222021-06-27+23:59:59%22,%22%3E%3Doccurrences.date_from%22:%222021-05-27+00:00:00%22%7D&per-page=9&sort=occurrences.date_to,-occurrences.date_from')
+        fetch('https://www.mos.ru/api/newsfeed/v4/frontend/json/ru/afisha?expand=spheres&filter=%7B%22%3C%3Ddate_from%22:%222021-06-15+23:59:59%22,%22%3E%3Ddate_from%22:%222021-06-14+00:00:00%22%7D&per-page=9&sort=occurrences.date,-occurrences.date')
             .then((response) => response.json())
             .then((json) => this.setState({ data: json.items }))
             .catch((error) => console.error(error))
@@ -29,7 +29,7 @@ class Recomendation extends Component {
                         <View key= {i} style={styles.block}>
                             <View style={styles.date}>
                                 <Text style={styles.dateText}>
-                                    <Text style={{textAlign: "center"}}>11</Text> июня 22:00
+                                    {el.date}
                                 </Text>
                             </View>
                             <ImageBackground key= {i}
@@ -40,7 +40,7 @@ class Recomendation extends Component {
                                 <Text style={styles.text}> {el.title} </Text>
                                 <Text style={styles.location}>Главclub</Text>
                                 <View style={styles.type}> 
-                                    <Text style={{color: '#ffffff'}}>Концерты</Text> 
+                                    <Text style={{color: '#ffffff'}}>{el.spheres[0].title}</Text> 
                                 </View>
                             </View>
                         </View>
@@ -82,9 +82,9 @@ const styles = StyleSheet.create({
         width: 55
     },
     dateText: {
-        fontSize: 18,
+        fontSize: 12,
         fontWeight: "500",
-        lineHeight: 18,
+        lineHeight: 12,
         letterSpacing: -0.015,
         color: "#ffffff",
         marginLeft: 5
@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#000000",
         borderRadius: 30,
         height: 16,
-        width: 68 
+        width: 100 
     }
 })
 

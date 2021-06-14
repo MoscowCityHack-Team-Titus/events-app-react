@@ -6,6 +6,7 @@ import HomePage from './src/HomePage'
 import MapPage from './src/MapPage'
 import Favourites from './src/Favourites'
 import EventPage from './src/EventPage'
+import SearchPage from './src/SearchPage'
 import Label from './src/Label';
 
 export default App = () => {
@@ -45,6 +46,12 @@ export default App = () => {
           hideNavBar = {true}
           key = 'EventPage'
           title = 'EventPage'
+        />
+        <Scene
+          component = {SearchPage}
+          hideNavBar = {true}
+          key = "SearchPage"
+          title = "SearchPage"
         />
       </Scene>
     </Router>

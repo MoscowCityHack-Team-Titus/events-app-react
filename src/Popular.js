@@ -13,7 +13,7 @@ class Recomendation extends Component {
     }
 
     componentDidMount() {
-        fetch('https://www.mos.ru/api/newsfeed/v4/frontend/json/ru/afisha?expand=spheres&fields=id,title,label,image,date_from,date_to,kind,free&filter=%7B%22%3C%3Doccurrences.date_from%22:%222021-06-27+23:59:59%22,%22%3E%3Doccurrences.date_from%22:%222021-05-27+00:00:00%22%7D&per-page=9&sort=occurrences.date_to,-occurrences.date_from')
+        fetch('https://www.mos.ru/api/newsfeed/v4/frontend/json/ru/afisha?expand=spheres&filter=%7B%22%3C%3Doccurrences.date_from%22:%222021-06-15+23:59:59%22,%22%3E%3Doccurrences.date_from%22:%222021-05-27+00:00:00%22%7D&per-page=9&sort=occurrences.date_to,-occurrences.date_from')
             .then((response) => response.json())
             .then((json) => this.setState({ data: json.items }))
             .catch((error) => console.error(error))
@@ -40,11 +40,11 @@ class Recomendation extends Component {
                                         height: '100%'
                                 }}/>
                                 <View style={styles.type}>
-                                    <Text>Концерты</Text>
+                                    <Text>{el.spheres[0].title}</Text>
                                 </View>
                                 <View style={styles.about} key={ i }>
                                     <Text style={styles.titleEvent}> {el.title} </Text>
-                                    <Text style={styles.date}> 14 июня 20:00 </Text>
+                                    <Text style={styles.date}> {el.date} </Text>
                                     <Text style={styles.location}> YOTA ARENA </Text>
                                 </View>
                             </ImageBackground>
@@ -106,7 +106,7 @@ const styles = StyleSheet.create({
         backgroundColor: "#FFFDFE",
         borderRadius: 30,
         height: 16,
-        width: 68
+        width: 100
     }
 })
 

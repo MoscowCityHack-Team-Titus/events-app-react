@@ -2,16 +2,18 @@ import React, { Component } from 'react'
 import { StyleSheet, View } from 'react-native';
 import { Input } from 'react-native-elements'
 import { Icon } from 'react-native-elements';
+import { Actions } from 'react-native-router-flux';
 
 class SearchNavBar extends Component {
 
-    state = {
-        searchParams: '',
-    }
 
     constructor() {
         super();
+        this.state = {
+            text: ''
+        }
     }
+
     
     render () {
         return (
@@ -33,6 +35,9 @@ class SearchNavBar extends Component {
                             color="#BEBEBE"
                         />
                     }
+                    value={this.state.text}
+                    onChangeText={(text) => this.setState({text})}
+                    onSubmitEditing={() => Actions.SearchPage({text: this.state.text})}
                 />
             </View>
         );
@@ -43,8 +48,6 @@ const styles = StyleSheet.create({
     search: {
         marginTop: 10,
         borderRadius: 30,
-        // shadowColor: 'rgba(178, 178, 178, 0.25)',
-        // shadowOffset: { top: 0, left: 4, bottom: 10},
         backgroundColor: '#FFFDFE',
         width: 244,
         height: 50
